@@ -7,7 +7,7 @@ struct Station
 {
     char name[512];
     int exchange;
-} stations[5000] __attribute__((aligned(sizeof(size_t))));
+} stations[5000];
 int cnt_stations=0;
 
 static inline int find_st(char *str)
@@ -71,14 +71,6 @@ void dij(int s)
             }
         }
         vis[x]=1;
-//        for(y=1; y<=n; y++)
-//        {
-//            if(d[y]>d[x]+G[x][y])
-//            {
-//                d[y]=d[x]+G[x][y];
-//                p[y]=x;
-//            }
-//        }
         int u;
         for(u=head[x]; u; u=edges[u].next)
         {
@@ -128,11 +120,8 @@ void print_path(int s,int t)
         sum++;
     }
 
-
-
     printf("%d(%d)-",cur,sum);
     printf("%s",stations[t].name);
-
 }
 void dfs(int u)
 {
@@ -145,23 +134,9 @@ void dfs(int u)
         if(!vis[v])
             dfs(v);
     }
-
-    __asm("xor %rax,%rax\n");
-    __asm("nop\n");
-    __asm("sub %rax,%rax\n");
-    __asm("add %rax,%rax\n");
-    __asm("test %rax,%rax\n");
-    __asm("nop\n");
-    __asm("jz .dfs_233\n\n.dfs_233:\n");
-    __asm("nop\n");
 }
 int main()
 {
-    __asm("xor %rax,%rax\n");
-    __asm("test %rax,%rax\n");
-    __asm("jz .main_1\n\n.main_1:\n");
-    __asm("nop\n");
-
     FILE *fin=fopen("bgstations.txt","r");
 
     int lines;
@@ -175,25 +150,15 @@ int main()
         {
             int f;
             fscanf(fin,"%s%d",buf,&f);
-            if(1||f)
-            {
-                int tmp=find_st(buf);
-                if(tmp==-1)
-                {
-                    ins_station(buf,f);
-                    v=cnt_stations;
-                }
-                else
-                {
-                    v=tmp;
-                }
-
-            }
-            else
+            int tmp=find_st(buf);
+            if(tmp==-1)
             {
                 ins_station(buf,f);
                 v=cnt_stations;
-
+            }
+            else
+            {
+                v=tmp;
             }
             if(u!=-1)
             {
@@ -211,13 +176,9 @@ int main()
     assert(t!=-1);
 
     memset(vis,0,sizeof(vis));
-    //dfs(s);
-//    printf("s=%d,t=%d\n",s,t);
     dij(s);
 //    for(t=0; t<=cnt_stations; t++)
 //        printf("%d\n",d[t]);
     print_path(s,t);
-    __asm("xor %rax,%rax\n");
-    __asm("nop\n");
     return 0;
 }
