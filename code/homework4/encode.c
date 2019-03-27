@@ -115,6 +115,7 @@ int main()
         else
             fputc(ch,fout);
     }
-
+    fclose(fin);
+    fclose(fout);
     return 0;
 }
