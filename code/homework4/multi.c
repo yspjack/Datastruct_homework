@@ -32,6 +32,12 @@ void ins(Node **phead,long long a,long long n)
         (*phead)=tmp;
         return;
     }
+    if((*phead)->n == tmp->n)
+    {
+        (*phead)->a += a;
+        free(tmp);
+        return;
+    }
     Node *p,*q;
     p=(*phead);
     q=(*phead)->next;
