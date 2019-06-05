@@ -96,22 +96,20 @@ void dump(struct Node* u)
 }
 int main()
 {
-    //freopen("article.txt","r",stdin);
+    freopen("article.txt","r",stdin);
     while(getword())
     {
         //printf("$$%s$$\n",buf);
         ins(buf);
     }
-    printf("%s ",root->val);
-    if(root->rch)
-    {
-        printf("%s ",root->rch->val);
-    }
-    if(root->rch && root->rch->rch)
-    {
-        printf("%s",root->rch->rch->val);
-    }
-    printf("\n");
+    if(root)
+        printf("%s",root->val);
+    if(root && root->rch)
+        printf(" %s",root->rch->val);
+    if(root && root->rch && root->rch->rch)
+        printf(" %s",root->rch->rch->val);
+    if(root)
+        printf("\n");
     dump(root);
     return 0;
 }
